@@ -9,22 +9,12 @@ app.config.from_object('config')
 db.init_app(app)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def ads_list():
-    return render_template('ads_list.html', ads=[{
-            "settlement": "Череповец",
-            "under_construction": False,
-            "description": '''Квартира в отличном состоянии. Заезжай и живи!''',
-            "price": 2080000,
-            "oblast_district": "Череповецкий район",
-            "living_area": 17.3,
-            "has_balcony": True,
-            "address": "Юбилейная",
-            "construction_year": 2001,
-            "rooms_number": 2,
-            "premise_area": 43.0,
-        }]*10
-    )
+    if request.method == 'POST':
+        return render_template('ads_panel.html')
+    elif request.method == 'GET':
+        return render_template('ads_list.html')
 
 
 if __name__ == '__main__':

@@ -114,55 +114,12 @@
                       <span class="input-group-addon">р.</span>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-success">Показать</button>
+                  <button type="button" class="btn btn-success" onclick="Submit()">Показать</button>
                 </div>
               </form>
             </div>
             <div class="col-sm-8">
-              <div class="panel panel-default">
-                {% for ad in ads %}
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <div>
-                          <div class="row">
-                            <div class="col-sm-7">
-                              <p><strong>Продается {{ ad.rooms_number }}-комнатная квартира</strong></p>
-                            </div>
-                            <div class="col-sm-5">
-                              <p class="text-right"><strong class="nowrap">{{ ad.price }} р.</strong></p>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-sm-12">
-                              <p>{{ ad.settlement }}, {{ ad.address }}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-12">
-                        <p>
-                          <span class="label label-success">комнат: {{ ad.rooms_number }}</span>
-                          <span class="label label-primary">{{ ad.premise_area }} кв.м.</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <hr>
-                {% endfor %}
-                <div class="panel-body">
-                  <div class="clearfix">
-                    <ul class="pagination pull-right">
-                      <li class="disabled"><span>«</span></li>
-                      <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
-                      <li><a href="?page=2" role="next">2</a></li>
-                      <li><a href="?page=3" role="next">3</a></li>
-                      <li><a href="?page=4" role="next">4</a></li>
-                      <li><a href="?page=2" role="next">»</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <div class="panel panel-default js-ads-panel"></div>
             </div>
           </div>
         </div>
@@ -171,5 +128,21 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" language="javascript">
+      function Submit() {
+        var form = $("form").serialize();
+        $.ajax({
+          type: "POST",
+          url: "/",
+          data: form,
+          success: function(data){
+            $(".js-ads-panel").html(data);
+          },
+          error: function(xhr, str){
+    	    alert("ERROR: " + xhr.responseCode);
+          }
+        });
+      }
+    </script>
   </body>
 </html>

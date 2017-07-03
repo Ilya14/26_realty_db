@@ -1,13 +1,14 @@
-import requests
 import json
+import argparse
 
 from datetime import datetime
 from server import app
 from models import db, Ads
 
 
-def get_json_ads(url):
-    return requests.get(url).json()
+def get_json_ads(json_file_name):
+    with open(json_file_name, 'r') as file_handler:
+        return json.load(file_handler)
 
 
 def json_print(json_content):
@@ -17,8 +18,11 @@ def json_print(json_content):
 def migrate(json_ads):
     new_building_age = 2
     for json_ad in json_ads:
-        if not json_ad['under_construction']:
+        if json_ad['construction_year'] is not None:
             age = datetime.today().year - json_ad['construction_year']
+            active = (age <= new_building_age) or json_ad['under_construction']
+        else:
+            active = False
         ad = Ads(settlement=json_ad['settlement'],
                  under_construction=json_ad['under_construction'],
                  description=json_ad['description'],
@@ -30,14 +34,20 @@ def migrate(json_ads):
                  construction_year=json_ad['construction_year'],
                  rooms_number=json_ad['rooms_number'],
                  premise_area=json_ad['premise_area'],
-                 active=age <= new_building_age)
+                 active=active)
         db.session.add(ad)
     db.session.commit()
 
 
+def get_args():
+    parser = argparse.ArgumentParser(description='Script for ads loading from the json-file and database up-dating')
+    parser.add_argument('ads_json', help='Ads json file name')
+    return parser.parse_args()
+
+
 if __name__ == '__main__':
-    url = 'https://devman.org/assets/ads.json'
-    json_ads = get_json_ads(url)
+    args = get_args()
+    json_ads = get_json_ads(args.ads_json)
 
     with app.app_context():
         json_print(json_ads)
