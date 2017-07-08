@@ -21,6 +21,7 @@ class Ads(db.Model):
     active = db.Column(db.Boolean)
 
     def __init__(self,
+                 id,
                  settlement,
                  under_construction,
                  description,
@@ -33,6 +34,7 @@ class Ads(db.Model):
                  rooms_number,
                  premise_area,
                  active):
+        self.id = id
         self.settlement = settlement
         self.under_construction = under_construction
         self.description = description

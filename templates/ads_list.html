@@ -31,7 +31,7 @@
         <div class="col-md-9">
           <div class="row">
             <div class="col-sm-4">
-              <form role="form" class="panel panel-default" method="GET">
+              <form role="form" class="panel panel-default js-form" method="GET">
                 <div class="panel-body">
                   <p>город / районный центр</p>
                   <div class="form-group">
@@ -114,7 +114,7 @@
                       <span class="input-group-addon">р.</span>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-success" onclick="Submit()">Показать</button>
+                  <button type="button" class="btn btn-success" onclick="GetPage('/1')">Показать</button>
                 </div>
               </form>
             </div>
@@ -129,12 +129,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" language="javascript">
-      function Submit() {
-        var form = $("form").serialize();
+      function GetPage(url) {
         $.ajax({
           type: "POST",
-          url: "/",
-          data: form,
+          url: url,
+          data: $(".js-form").serialize(),
           success: function(data){
             $(".js-ads-panel").html(data);
           },
@@ -143,6 +142,10 @@
           }
         });
       }
+
+      window.onload = function() {
+        GetPage("/1");
+      };
     </script>
   </body>
 </html>
