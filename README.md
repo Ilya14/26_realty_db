@@ -43,7 +43,7 @@ optional arguments:
   -h, --help   show this help message and exit
 ```
 
-For local use of the website it is necessary to execute:
+For local use of the site it is necessary to execute:
 
 ```sh
 $ python3.5 ./server.py
