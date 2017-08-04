@@ -38,7 +38,7 @@ def migrate(json_ads):
 
 def get_inactive_ids(json_ads):
     json_ids = set([json_ad['id'] for json_ad in json_ads])
-    db_ids = set([item.id for item in Ads.query.all()])
+    db_ids = set([ad.id for ad in Ads.query.all()])
     return list(db_ids.difference(json_ids))
 
 
