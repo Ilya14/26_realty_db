@@ -6,7 +6,7 @@ db = SQLAlchemy()
 class Ads(db.Model):
     __tablename__ = 'ads'
 
-    id = db.Column(db.Integer, index=True, primary_key=True)
+    ad_id = db.Column(db.Integer, index=True, primary_key=True)
     settlement = db.Column(db.String(50))
     under_construction = db.Column(db.Boolean)
     description = db.Column(db.Text)
@@ -21,7 +21,7 @@ class Ads(db.Model):
     active = db.Column(db.Boolean, index=True)
 
     def __init__(self,
-                 id,
+                 ad_id,
                  settlement,
                  under_construction,
                  description,
@@ -34,7 +34,7 @@ class Ads(db.Model):
                  rooms_number,
                  premise_area,
                  active):
-        self.id = id
+        self.ad_id = ad_id
         self.settlement = settlement
         self.under_construction = under_construction
         self.description = description

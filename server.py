@@ -19,7 +19,8 @@ def get_query_params(query_data):
 
 
 def get_page(query_data):
-    return query_data.get('page', default=1, type=int)
+    default_page = 1
+    return query_data.get('page', default=default_page, type=int)
 
 
 def get_filtered_ads(query_params):
