@@ -1,3 +1,4 @@
+import requests
 import json
 import argparse
 
@@ -6,22 +7,42 @@ from models import db, Ads
 
 
 def get_json_ads(json_file_name):
-    with open(json_file_name, 'r') as file_handler:
-        return json.load(file_handler)
+    if json_file_name is not None:
+        print('Receiving ads from file "{0}"...'.format(json_file_name))
+        with open(json_file_name, 'r') as file_handler:
+            return json.load(file_handler)
+    else:
+        ads_url = 'https://devman.org/assets/ads.json'
+        print('Receiving ads from url "{0}"...'.format(ads_url))
+        return json.loads(requests.get(ads_url).text)
 
 
-def migrate(json_ads, inactive_ids):
+def migrate(json_ads):
+    inactive_ids = get_inactive_ids(json_ads)
+
+    for inactive_id in inactive_ids:
+        ad = Ads.query.get(inactive_id)
+        ad.active = False
+        db.session.add(ad)
+
     for json_ad in json_ads:
         ad = Ads.query.get(json_ad['id'])
         if ad is not None:
-            ad = ad_update(ad, json_ad, inactive_ids)
+            ad = ad_update(ad, json_ad)
         else:
             ad = ad_create(json_ad)
         db.session.add(ad)
+
     db.session.commit()
 
 
-def ad_update(ad, json_ad, inactive_ids):
+def get_inactive_ids(json_ads):
+    json_ids = set([json_ad['id'] for json_ad in json_ads])
+    db_ids = set([item.id for item in Ads.query.all()])
+    return list(db_ids.difference(json_ids))
+
+
+def ad_update(ad, json_ad):
     ad.settlement = json_ad['settlement']
     ad.under_construction = json_ad['under_construction']
     ad.description = json_ad['description']
@@ -33,8 +54,7 @@ def ad_update(ad, json_ad, inactive_ids):
     ad.construction_year = json_ad['construction_year']
     ad.rooms_number = json_ad['rooms_number']
     ad.premise_area = json_ad['premise_area']
-    if ad.active is True:
-        ad.active = json_ad['id'] not in inactive_ids
+    ad.active = True
     return ad
 
 
@@ -55,15 +75,16 @@ def ad_create(json_ad):
 
 
 def get_args():
-    parser = argparse.ArgumentParser(description='Script for ads loading from the json-file and database up-dating')
-    parser.add_argument('ads_json', help='Ads json file name')
-    parser.add_argument('inactive_ids', metavar='inactive_id', type=int, nargs='*', help='ID list of outdated ads')
+    parser = argparse.ArgumentParser(
+        description='Script for ads loading from the url or json-file and database up-dating'
+    )
+    parser.add_argument('--file_name', help='Ads json file name')
     return parser.parse_args()
 
 
 if __name__ == '__main__':
     args = get_args()
-    json_ads = get_json_ads(args.ads_json)
+    json_ads = get_json_ads(args.file_name)
 
     with app.app_context():
-        migrate(json_ads, args.inactive_ids)
+        migrate(json_ads)

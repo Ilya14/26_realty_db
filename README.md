@@ -14,33 +14,29 @@ with app.app_context():
     db.create_all()
 ```
 
-For modification of base it is necessary to execute:
+For modification of base with use of the url https://devman.org/assets/ads.json it is necessary to execute:
 
 ```sh
-$ python3.5 ./ads_loader.py ./ads.json
+$ python3.5 ./ads_loader.py
 ```
 
-To hide from delivery on the site outdated ads, it is necessary to specify them by ID list.
-For example:
-
+or with use of the json-file:
 ```sh
-$ python3.5 ./ads_loader.py ./ads.json 25675 21146
+$ python3.5 ./ads_loader.py --file_name=./ads.json
 ```
 
 To obtain more information execute:
 
 ```sh
 $ python3.5 ./ads_loader.py -h
-usage: ads_loader.py [-h] ads_json [inactive_id [inactive_id ...]]
+usage: ads_loader.py [-h] [--file_name FILE_NAME]
 
-Script for ads loading from the json-file and database up-dating
-
-positional arguments:
-  ads_json     Ads json file name
-  inactive_id  ID list of outdated ads
+Script for ads loading from the url or json-file and database up-dating
 
 optional arguments:
-  -h, --help   show this help message and exit
+  -h, --help            show this help message and exit
+  --file_name FILE_NAME
+                        Ads json file name
 ```
 
 For local use of the site it is necessary to execute:
