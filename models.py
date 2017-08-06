@@ -3,18 +3,22 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
+STRING_SIZE_50 = 50
+STRING_SIZE_100 = 100
+
+
 class Ads(db.Model):
     __tablename__ = 'ads'
 
     ad_id = db.Column(db.Integer, index=True, primary_key=True)
-    settlement = db.Column(db.String(50))
+    settlement = db.Column(db.String(STRING_SIZE_50))
     under_construction = db.Column(db.Boolean)
     description = db.Column(db.Text)
     price = db.Column(db.Integer, index=True)
-    oblast_district = db.Column(db.String(50), index=True)
+    oblast_district = db.Column(db.String(STRING_SIZE_50), index=True)
     living_area = db.Column(db.Float)
     has_balcony = db.Column(db.Boolean)
-    address = db.Column(db.String(100))
+    address = db.Column(db.String(STRING_SIZE_100))
     construction_year = db.Column(db.Integer, index=True)
     rooms_number = db.Column(db.Integer)
     premise_area = db.Column(db.Float)
