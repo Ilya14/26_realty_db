@@ -1,6 +1,7 @@
 import requests
 import json
 import argparse
+import logging
 
 from server import app
 from models import db, Ads
@@ -8,12 +9,12 @@ from models import db, Ads
 
 def get_json_ads(json_file_name):
     if json_file_name is not None:
-        print('Receiving ads from file "{0}"...'.format(json_file_name))
+        logging.info('Receiving ads from file "%s"...', json_file_name)
         with open(json_file_name, 'r') as file_handler:
             return json.load(file_handler)
     else:
         ads_url = 'https://devman.org/assets/ads.json'
-        print('Receiving ads from url "{0}"...'.format(ads_url))
+        logging.info('Receiving ads from url  "%s"...', ads_url)
         return json.loads(requests.get(ads_url).text)
 
 
@@ -38,7 +39,7 @@ def migrate(json_ads):
 
 def get_inactive_ids(json_ads):
     json_ids = set([json_ad['id'] for json_ad in json_ads])
-    db_ids = set([ad.ad_id for ad in Ads.query.all()])
+    db_ids = set([ad.ad_id for ad in Ads.query.values(Ads.ad_id)])
     return list(db_ids.difference(json_ids))
 
 
@@ -83,6 +84,12 @@ def get_args():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(
+        level=logging.INFO,
+        format=u'%(filename)s# %(levelname)-8s [%(asctime)s] %(message)s',
+        datefmt=u'%m/%d/%Y %I:%M:%S %p'
+    )
+
     args = get_args()
     json_ads = get_json_ads(args.file_name)
 

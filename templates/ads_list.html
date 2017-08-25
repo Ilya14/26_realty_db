@@ -35,65 +35,69 @@
                   <p>город / районный центр</p>
                   <div class="form-group">
                     <select name="oblast_district" class="form-control">
-                      <option value="Череповецкий район">Череповец</option>
-                      <option value="Шекснинский район">Шексна</option>
-                      <option value="Вологодский район">Вологда</option>
+                      <option {% if params.oblast_district == "Череповецкий район" %}selected{% endif %} value="Череповецкий район">Череповец</option>
+                      <option {% if params.oblast_district == "Шекснинский район" %}selected{% endif %} value="Шекснинский район">Шексна</option>
+                      <option {% if params.oblast_district == "Вологодский район" %}selected{% endif %} value="Вологодский район">Вологда</option>
                       <optgroup label="Б">
-                        <option value="Бабаевский район">Бабаево</option>
-                        <option value="Бабушкинский район">Село имени Бабушкина</option>
-                        <option value="Белозерский район">Белозерск</option>
+                        <option {% if params.oblast_district == "Бабаевский район" %}selected{% endif %} value="Бабаевский район">Бабаево</option>
+                        <option {% if params.oblast_district == "Бабушкинский район" %}selected{% endif %} value="Бабушкинский район">Село имени Бабушкина</option>
+                        <option {% if params.oblast_district == "Белозерский район" %}selected{% endif %} value="Белозерский район">Белозерск</option>
                       </optgroup>
                       <optgroup label="В">
-                        <option value="Великоустюгский район">Великий Устюг</option>
-                        <option value="Верховажский район">Верховажье</option>
-                        <option value="Вожегодский район">Вожега</option>
-                        <option value="Вологодский район">Вологда</option>
-                        <option value="Вытегорский район">Вытегра</option>
+                        <option {% if params.oblast_district == "Великоустюгский район" %}selected{% endif %} value="Великоустюгский район">Великий Устюг</option>
+                        <option {% if params.oblast_district == "Верховажский район" %}selected{% endif %} value="Верховажский район">Верховажье</option>
+                        <option {% if params.oblast_district == "Вожегодский район" %}selected{% endif %} value="Вожегодский район">Вожега</option>
+                        <option {% if params.oblast_district == "Вологодский район" %}selected{% endif %} value="Вологодский район">Вологда</option>
+                        <option {% if params.oblast_district == "Вытегорский район" %}selected{% endif %} value="Вытегорский район">Вытегра</option>
                       </optgroup>
                       <optgroup label="Г">
-                        <option value="Грязовецкий район">Грязовец</option>
+                        <option {% if params.oblast_district == "Грязовецкий район" %}selected{% endif %} value="Грязовецкий район">Грязовец</option>
                       </optgroup>
                       <optgroup label="К">
-                        <option value="Кадуйский район">Кадуй</option>
-                        <option value="Кирилловский район">Кириллов</option>
-                        <option value="Кичменгско-Городецкий район">Кичменгский Городок</option>
+                        <option {% if params.oblast_district == "Кадуйский район" %}selected{% endif %} value="Кадуйский район">Кадуй</option>
+                        <option {% if params.oblast_district == "Кирилловский район" %}selected{% endif %} value="Кирилловский район">Кириллов</option>
+                        <option {% if params.oblast_district == "Кичменгско-Городецкий район" %}selected{% endif %} value="Кичменгско-Городецкий район">Кичменгский Городок</option>
                       </optgroup>
                       <optgroup label="Л">
-                        <option value="Вашкинский район">Липин Бор</option>
+                        <option {% if params.oblast_district == "Вашкинский район" %}selected{% endif %} value="Вашкинский район">Липин Бор</option>
                       </optgroup>
                       <optgroup label="Н">
-                        <option value="Никольский район">Никольск</option>
-                        <option value="Нюксенский район">Нюксеница</option>
+                        <option {% if params.oblast_district == "Никольский район" %}selected{% endif %} value="Никольский район">Никольск</option>
+                        <option {% if params.oblast_district == "Нюксенский район" %}selected{% endif %} value="Нюксенский район">Нюксеница</option>
                       </optgroup>
                       <optgroup label="С">
-                        <option value="Сокольский район">Сокол</option>
-                        <option value="Сямженский район">Сямжа</option>
+                        <option {% if params.oblast_district == "Сокольский район" %}selected{% endif %} value="Сокольский район">Сокол</option>
+                        <option {% if params.oblast_district == "Сямженский район" %}selected{% endif %} value="Сямженский район">Сямжа</option>
                       </optgroup>
                       <optgroup label="Т">
-                        <option value="Тарногский район">Тарногский Городок</option>
-                        <option value="Тотемский район">Тотьма</option>
+                        <option {% if params.oblast_district == "Тарногский район" %}selected{% endif %} value="Тарногский район">Тарногский Городок</option>
+                        <option {% if params.oblast_district == "Тотемский район" %}selected{% endif %} value="Тотемский район">Тотьма</option>
                       </optgroup>
                       <optgroup label="У">
-                        <option value="Усть-Кубинский район">Устье</option>
-                        <option value="Устюженский район">Устюжна</option>
+                        <option {% if params.oblast_district == "Усть-Кубинский район" %}selected{% endif %} value="Усть-Кубинский район">Устье</option>
+                        <option {% if params.oblast_district == "Устюженский район" %}selected{% endif %} value="Устюженский район">Устюжна</option>
                       </optgroup>
                       <optgroup label="Х">
-                        <option value="Харовский район">Харовск</option>
+                        <option {% if params.oblast_district == "Харовский район" %}selected{% endif %} value="Харовский район">Харовск</option>
                       </optgroup>
                       <optgroup label="Ч">
-                        <option value="Чагодощенский район">Чагода</option>
-                        <option value="Череповецкий район">Череповец</option>
+                        <option {% if params.oblast_district == "Чагодощенский район" %}selected{% endif %} value="Чагодощенский район">Чагода</option>
+                        <option {% if params.oblast_district == "Череповецкий район" %}selected{% endif %} value="Череповецкий район">Череповец</option>
                       </optgroup>
                       <optgroup label="Ш">
-                        <option value="Шекснинский район">Шексна</option>
-                        <option value="Междуреченский район">Шуйское</option>
+                        <option {% if params.oblast_district == "Шекснинский район" %}selected{% endif %} value="Шекснинский район">Шексна</option>
+                        <option {% if params.oblast_district == "Междуреченский район" %}selected{% endif %} value="Междуреченский район">Шуйское</option>
                       </optgroup>
                     </select>
                   </div>
                   <div class="form-group ">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" name="new_building" value="True">
+                        {% if params.new_building %}
+                        <input type="checkbox" name="new_building" checked>
+                        {% else %}
+                        <input type="checkbox" name="new_building">
+                        {% endif %}
                         только новостройки
                       </label>
                     </div>
@@ -102,14 +106,22 @@
                   <div class="form-group ">
                     <div class="input-group">
                       <span class="input-group-addon">от</span>
+                      {% if params.min_price %}
+                      <input autocomplete="off" type="text" value="{{params.min_price}}" name="min_price" class="form-control js-price-format" placeholder="любая">
+                      {% else %}
                       <input autocomplete="off" type="text" value="" name="min_price" class="form-control js-price-format" placeholder="любая">
+                      {% endif %}
                       <span class="input-group-addon">р.</span>
                     </div>
                   </div>
                   <div class="form-group ">
                     <div class="input-group">
                       <span class="input-group-addon">до</span>
+                      {% if params.max_price %}
+                      <input autocomplete="off" type="text" value="{{params.max_price}}" name="max_price" class="form-control js-price-format" placeholder="любая">
+                      {% else %}
                       <input autocomplete="off" type="text" value="" name="max_price" class="form-control js-price-format" placeholder="любая">
+                      {% endif %}
                       <span class="input-group-addon">р.</span>
                     </div>
                   </div>

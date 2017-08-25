@@ -9,9 +9,8 @@ json format to the database.
 
 In case of the first use it is necessary to create the database:
 
-```python
-with app.app_context():
-    db.create_all()
+```sh
+$ python3.5 ./create_db.py
 ```
 
 For modification of base with use of the url https://devman.org/assets/ads.json it is necessary to execute:
